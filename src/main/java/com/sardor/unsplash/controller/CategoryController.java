@@ -2,29 +2,49 @@ package com.sardor.unsplash.controller;
 
 import com.sardor.unsplash.entity.Category;
 import com.sardor.unsplash.payload.ApiResponse;
+import com.sardor.unsplash.payload.CategoryDto;
 import com.sardor.unsplash.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/category")
-@Validated
 public class CategoryController {
 
     @Autowired
     CategoryService categoryService;
 
     @PostMapping
-    public HttpEntity<?> add(@RequestBody @Valid Category category) {
-        ApiResponse apiResponse = categoryService.add(category);
+    public HttpEntity<?> add(@RequestBody CategoryDto categoryDto) {
+        ApiResponse apiResponse = categoryService.add(categoryDto);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @PutMapping("/{id}")
+    public HttpEntity<?> edit(@PathVariable Integer id, @RequestBody CategoryDto categoryDto) {
+        ApiResponse apiResponse = categoryService.edit(id, categoryDto);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("/{id}")
+    public HttpEntity<?> getOne(@PathVariable Integer id) {
+        ApiResponse apiResponse = categoryService.getOne(id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping
+    public HttpEntity<?> getAll() {
+        ApiResponse apiResponse = categoryService.getAll();
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> delete(@PathVariable Integer id) {
+        ApiResponse apiResponse = categoryService.delete(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }
