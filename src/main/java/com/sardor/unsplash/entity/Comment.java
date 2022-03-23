@@ -19,6 +19,10 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class Comment extends AbsMainEntity {
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Book book;
+
     @Column(length = 500)
     private String text;
 

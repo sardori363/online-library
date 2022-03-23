@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/comment")
@@ -21,6 +18,30 @@ public class CommentController {
     @PostMapping
     public HttpEntity<?> add(@RequestBody CommentDto commentDto) {
         ApiResponse apiResponse = commentService.add(commentDto);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @PutMapping("/{id}")
+    public HttpEntity<?> edit(@PathVariable Integer id, @RequestBody CommentDto commentDto) {
+        ApiResponse apiResponse = commentService.edit(id, commentDto);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("/{id}")
+    public HttpEntity<?> getOne(@PathVariable Integer id) {
+        ApiResponse apiResponse = commentService.getOne(id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping
+    public HttpEntity<?> getAll() {
+        ApiResponse apiResponse = commentService.getAll();
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> delete(@PathVariable Integer id) {
+        ApiResponse apiResponse = commentService.delete(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }
