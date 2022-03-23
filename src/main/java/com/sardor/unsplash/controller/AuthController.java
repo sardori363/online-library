@@ -24,13 +24,13 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    final
+    @Autowired
     AuthService authService;
 
     final
     AuthenticationManager authenticationManager;
 
-    final
+    @Autowired
     JwtProvider jwtProvider;
 
     /**

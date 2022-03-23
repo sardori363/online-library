@@ -16,15 +16,14 @@ import com.sardor.unsplash.repository.RoleRepository;
 import com.sardor.unsplash.repository.UserRepository;
 
 @Service
-@RequiredArgsConstructor
 public class  AuthService implements UserDetailsService {
-    final
+    @Autowired
     UserRepository userRepository;
 
-    final
+    @Autowired
     PasswordEncoder passwordEncoder;
 
-    final
+    @Autowired
     RoleRepository roleRepository;
 
 

@@ -18,19 +18,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
-    final
+    @Autowired
     UserRepository userRepository;
 
-    final
+    @Autowired
     PasswordEncoder passwordEncoder;
 
-    final
+    @Autowired
     RoleService roleService;
 
-    final
+    @Autowired
     AttachmentRepository attachmentRepository;
 
     public ApiResponse add(UserDto userDto) {

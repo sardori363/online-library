@@ -4,6 +4,7 @@ import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.CategoryDto;
 import com.sardor.unsplash.service.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/category")
-@RequiredArgsConstructor
 public class CategoryController {
 
-    final CategoryService categoryService;
+    @Autowired
+    CategoryService categoryService;
 
     @PostMapping
     public HttpEntity<?> add(@RequestBody CategoryDto categoryDto) {

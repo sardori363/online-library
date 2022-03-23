@@ -1,6 +1,7 @@
 package com.sardor.unsplash.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,10 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/role")
-@RequiredArgsConstructor
 public class RoleController {
 
-    final RoleService roleService;
+    @Autowired
+    RoleService roleService;
 
 
     @PostMapping

@@ -4,6 +4,7 @@ import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.BookDto;
 import com.sardor.unsplash.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/book")
-@RequiredArgsConstructor
 public class BookController {
 
-    final BookService bookService;
+    @Autowired
+    BookService bookService;
 
 
     @PostMapping

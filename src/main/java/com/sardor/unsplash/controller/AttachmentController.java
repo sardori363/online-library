@@ -21,11 +21,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/attachment")
-@RequiredArgsConstructor
 public class AttachmentController {
-    final
+    @Autowired
     AttachmentRepository attachmentRepository;
-    final
+    @Autowired
     AttachmentContentRepository attachmentContentRepository;
 
 

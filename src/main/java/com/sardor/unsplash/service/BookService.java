@@ -9,17 +9,22 @@ import com.sardor.unsplash.repository.AttachmentRepository;
 import com.sardor.unsplash.repository.BookRepository;
 import com.sardor.unsplash.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class BookService {
 
-    final BookRepository bookRepository;
-    final AttachmentRepository attachmentRepository;
-    final CategoryRepository categoryRepository;
+    @Autowired
+    BookRepository bookRepository;
+
+    @Autowired
+    AttachmentRepository attachmentRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
 
     public ApiResponse add(BookDto bookDto) {

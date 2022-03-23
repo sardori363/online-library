@@ -1,6 +1,7 @@
 package com.sardor.unsplash.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,10 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/user")
-@RequiredArgsConstructor
 public class UserController {
 
-    final UserService userService;
+    @Autowired
+    UserService userService;
 
     @PostMapping()
     public HttpEntity<?> add(@Valid @RequestBody UserDto userDto) {

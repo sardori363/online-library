@@ -5,13 +5,14 @@ import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.CategoryDto;
 import com.sardor.unsplash.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class CategoryService {
 
-    final CategoryRepository categoryRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     public ApiResponse add(CategoryDto categoryDto) {
         Category category = new Category();
