@@ -1,5 +1,7 @@
 package com.sardor.unsplash.service;
 
+import com.sardor.unsplash.entity.Contacts;
+import com.sardor.unsplash.repository.ContactsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +34,9 @@ public class UserService {
     @Autowired
     AttachmentRepository attachmentRepository;
 
+    @Autowired
+    ContactsRepository contactsRepository;
+
     public ApiResponse add(UserDto userDto) {
         boolean b = userRepository.existsByUsername(userDto.getUsername());
         if (b) return new ApiResponse("USER ALREADY EXISTS", false);
@@ -45,13 +50,19 @@ public class UserService {
         user.setLastName(userDto.getLastName());
         user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setBio(userDto.getBio());
+
+        List<Contacts> allById = contactsRepository.findAllById(userDto.getContactsId());
+        if (allById.isEmpty()) return new ApiResponse("contacts not found", false);
+        user.setContacts(allById);
+
+
         user.setRole((Role) response.getObject());
 
         user.setEnabled(userDto.getEnabled());
 
         Optional<Attachment> optionalPhoto = attachmentRepository.findById(userDto.getPhotoId());
         if (optionalPhoto.isEmpty()) return new ApiResponse("PHOTO NOT FOUND", false);
-
         user.setPhoto(optionalPhoto.get());
 
         userRepository.save(user);
@@ -75,6 +86,11 @@ public class UserService {
         user.setLastName(userDto.getLastName());
         user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setBio(userDto.getBio());
+
+        List<Contacts> allById = contactsRepository.findAllById(userDto.getContactsId());
+        if (allById.isEmpty()) return new ApiResponse("contacts not found", false);
+        user.setContacts(allById);
 
         user.setRole((Role) response.getObject());
         user.setEnabled(userDto.getEnabled());

@@ -1,46 +1,46 @@
 package com.sardor.unsplash.controller;
 
 import com.sardor.unsplash.payload.ApiResponse;
-import com.sardor.unsplash.payload.CommentDto;
-import com.sardor.unsplash.service.CommentService;
+import com.sardor.unsplash.payload.ContactsDto;
+import com.sardor.unsplash.service.ContactsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/comment")
-public class CommentController {
+@RequestMapping("/api/contacts")
+public class ContactsController {
     @Autowired
-    CommentService commentService;
+    ContactsService contactsService;
 
     @PostMapping
-    public HttpEntity<?> add(@RequestBody CommentDto commentDto) {
-        ApiResponse apiResponse = commentService.add(commentDto);
+    public HttpEntity<?> add(@RequestBody ContactsDto contactsDto) {
+        ApiResponse apiResponse = contactsService.add(contactsDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
     @PutMapping("/{id}")
-    public HttpEntity<?> edit(@PathVariable Integer id, @RequestBody CommentDto commentDto) {
-        ApiResponse apiResponse = commentService.edit(id, commentDto);
+    public HttpEntity<?> edit(@PathVariable Integer id, @RequestBody ContactsDto contactsDto) {
+        ApiResponse apiResponse = contactsService.edit(id, contactsDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
     @GetMapping("/{id}")
     public HttpEntity<?> getOne(@PathVariable Integer id) {
-        ApiResponse apiResponse = commentService.getOne(id);
+        ApiResponse apiResponse = contactsService.getOne(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
     @GetMapping
     public HttpEntity<?> getAll() {
-        ApiResponse apiResponse = commentService.getAll();
+        ApiResponse apiResponse = contactsService.getAll();
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 
     @DeleteMapping("/{id}")
     public HttpEntity<?> delete(@PathVariable Integer id) {
-        ApiResponse apiResponse = commentService.delete(id);
+        ApiResponse apiResponse = contactsService.delete(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }

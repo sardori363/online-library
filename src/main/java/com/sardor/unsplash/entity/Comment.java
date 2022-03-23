@@ -1,6 +1,5 @@
 package com.sardor.unsplash.entity;
 
-import com.sardor.unsplash.entity.template.AbsEntity;
 import com.sardor.unsplash.entity.template.AbsMainEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;

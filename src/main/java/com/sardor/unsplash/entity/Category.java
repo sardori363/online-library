@@ -14,6 +14,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category extends AbsEntity {
-    @NotNull(message = "Name cannot be null.")
+    @Column(nullable = false)
     private String name;
 }
