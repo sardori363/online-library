@@ -39,9 +39,14 @@ public class User extends AbsEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(length = 2000)
+    private String bio;
+
+    @OneToMany
+    private List<Contacts> contacts;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Role role;
-
 
     @OneToOne
     private Attachment photo;
