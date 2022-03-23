@@ -21,7 +21,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping()
-    public HttpEntity<?> add(@Valid @RequestBody UserDto userDto) {
+    public HttpEntity<?> add(@RequestBody UserDto userDto) {
         ApiResponse apiResponse = userService.add(userDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
@@ -48,8 +48,8 @@ public class UserController {
     }
 
 
-    @PutMapping
-    public ResponseEntity<?> editMyProfile(@Valid @RequestBody ProfileDto profileDto) {
+    @PutMapping("edit-my-profile")
+    public ResponseEntity<?> editMyProfile(@RequestBody ProfileDto profileDto) {
         ApiResponse apiResponse = userService.editMyProfile(profileDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.OK : HttpStatus.CONFLICT).body(apiResponse);
     }

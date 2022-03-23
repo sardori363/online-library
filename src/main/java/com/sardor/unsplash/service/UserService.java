@@ -130,6 +130,11 @@ public class UserService {
         user.setLastName(profileDto.getLastName());
         user.setUsername(profileDto.getUsername());
         user.setPassword(passwordEncoder.encode(profileDto.getPassword()));
+        user.setBio(profileDto.getBio());
+
+        List<Contacts> allById = contactsRepository.findAllById(profileDto.getContactsId());
+        if (allById.isEmpty()) return new ApiResponse("contacts not found", false);
+        user.setContacts(allById);
 
         Optional<Attachment> optionalPhoto = attachmentRepository.findById(profileDto.getPhotoId());
         if (optionalPhoto.isEmpty()) return new ApiResponse("PHOTO NOT FOUND", false);
