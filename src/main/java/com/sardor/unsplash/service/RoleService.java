@@ -1,5 +1,6 @@
 package com.sardor.unsplash.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sardor.unsplash.entity.Role;
@@ -12,8 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class RoleService {
-    @Autowired
+    final
     RoleRepository roleRepository;
 
 

@@ -3,19 +3,18 @@ package com.sardor.unsplash.controller;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.BookDto;
 import com.sardor.unsplash.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/book")
+@RequiredArgsConstructor
 public class BookController {
 
-    @Autowired
-    BookService bookService;
+    final BookService bookService;
 
 
     @PostMapping

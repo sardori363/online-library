@@ -1,5 +1,6 @@
 package com.sardor.unsplash.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,18 +18,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
+    final
     UserRepository userRepository;
 
-    @Autowired
+    final
     PasswordEncoder passwordEncoder;
 
-    @Autowired
+    final
     RoleService roleService;
 
-    @Autowired
+    final
     AttachmentRepository attachmentRepository;
 
     public ApiResponse add(UserDto userDto) {

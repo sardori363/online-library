@@ -1,10 +1,9 @@
 package com.sardor.unsplash.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.sardor.unsplash.annotations.CheckPermission;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.RoleDto;
 import com.sardor.unsplash.service.RoleService;
@@ -13,9 +12,10 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/role")
+@RequiredArgsConstructor
 public class RoleController {
-    @Autowired
-    RoleService roleService;
+
+    final RoleService roleService;
 
 
     @PostMapping

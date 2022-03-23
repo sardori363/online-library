@@ -5,6 +5,7 @@ import com.sardor.unsplash.exeptions.RescuersNotFoundEx;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.ProfileDto;
 import com.sardor.unsplash.util.Constants;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,14 +16,15 @@ import com.sardor.unsplash.repository.RoleRepository;
 import com.sardor.unsplash.repository.UserRepository;
 
 @Service
+@RequiredArgsConstructor
 public class  AuthService implements UserDetailsService {
-    @Autowired
+    final
     UserRepository userRepository;
 
-    @Autowired
+    final
     PasswordEncoder passwordEncoder;
 
-    @Autowired
+    final
     RoleRepository roleRepository;
 
 

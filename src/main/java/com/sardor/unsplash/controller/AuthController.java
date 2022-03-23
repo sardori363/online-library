@@ -23,18 +23,19 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
-public class    AuthController {
-    @Autowired
+public class AuthController {
+    final
     AuthService authService;
 
     final
     AuthenticationManager authenticationManager;
 
-    @Autowired
+    final
     JwtProvider jwtProvider;
 
     /**
      * LOGIN YO'LI
+     *
      * @param loginDto
      * @return
      */
