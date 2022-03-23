@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category extends AbsEntity {
-    @Column(nullable = false)
+    @NotNull(message = "Name cannot be null.")
     private String name;
 }
