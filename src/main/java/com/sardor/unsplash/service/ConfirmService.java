@@ -31,6 +31,7 @@ public class ConfirmService {
             book.setPhoto(optionalRequest.getPhoto());
             book.setAuthor(optionalRequest.getAuthor());
             book.setFirstPublished(optionalRequest.getFirstPublished());
+            book.setAddedBy(optionalRequest.getCreatedBy());
 
             bookRepository.save(book);
             requestBookRepository.deleteById(requestId);

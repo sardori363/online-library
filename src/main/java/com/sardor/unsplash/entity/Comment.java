@@ -18,7 +18,7 @@ import javax.persistence.*;
 @EntityListeners(AuditingEntityListener.class)
 public class Comment extends AbsMainEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Book book;
 

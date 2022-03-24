@@ -8,8 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
-
 @RestController
 @RequestMapping("/api/confirmation")
 public class Confirmation {
@@ -17,8 +15,8 @@ public class Confirmation {
     ConfirmService confirmService;
 
     @PostMapping("/{requestId}")
-    public HttpEntity<?> confirm(@PathVariable Integer requestId,@RequestBody ConfirmDto confirmDto) {
-        ApiResponse apiResponse = confirmService.confirm(requestId,confirmDto);
+    public HttpEntity<?> confirm(@PathVariable Integer requestId, @RequestBody ConfirmDto confirmDto) {
+        ApiResponse apiResponse = confirmService.confirm(requestId, confirmDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }
