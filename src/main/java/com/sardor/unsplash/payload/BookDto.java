@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -14,4 +16,6 @@ public class BookDto {
     private String description;
     private Integer categoryId;
     private Integer photoId;
+    private String author;
+    private Date firstPublished;
 }

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -32,4 +33,10 @@ public class Book extends AbsEntity {
 
     @OneToOne
     private Attachment photo;
+
+    @Column(nullable = false)
+    private String author;
+
+    @Column(nullable = false)
+    private Date firstPublished;
 }

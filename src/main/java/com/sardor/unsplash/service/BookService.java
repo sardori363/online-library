@@ -45,6 +45,8 @@ public class BookService {
     public ApiResponse create(Book book, BookDto bookDto) {
         book.setName(bookDto.getName());
         book.setDescription(bookDto.getDescription());
+        book.setAuthor(bookDto.getAuthor());
+        book.setFirstPublished(bookDto.getFirstPublished());
 
         Optional<Attachment> optionalPdf = attachmentRepository.findById(bookDto.getPdfFileId());
         if (optionalPdf.isEmpty()) return new ApiResponse("pdf not found", false);
