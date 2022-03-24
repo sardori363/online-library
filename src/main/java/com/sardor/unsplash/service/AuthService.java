@@ -4,6 +4,7 @@ import com.sardor.unsplash.entity.User;
 import com.sardor.unsplash.exeptions.RescuersNotFoundEx;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.ProfileDto;
+import com.sardor.unsplash.payload.RegisterDto;
 import com.sardor.unsplash.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class  AuthService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("USER NOT FOUND"));
     }
 
-    public ApiResponse registerUser(ProfileDto registerDto) {
+    public ApiResponse registerUser(RegisterDto registerDto) {
 
         boolean b = userRepository.existsByUsername(registerDto.getUsername());
 

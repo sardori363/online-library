@@ -122,10 +122,6 @@ public class UserService {
         if (userRepository.existsByUsernameAndIdNot(profileDto.getUsername(), user.getId()))
             return new ApiResponse("USERNAME ALREADY EXISTS", false);
 
-        if (!profileDto.getPassword().equals(profileDto.getPrePassword()))
-            return new ApiResponse("PASSWORDS ARE NOT COMPATIBLE", false);
-
-
         user.setFirstName(profileDto.getFirstName());
         user.setLastName(profileDto.getLastName());
         user.setUsername(profileDto.getUsername());
@@ -144,6 +140,7 @@ public class UserService {
         userRepository.save(user);
         return new ApiResponse("UPDATED", true);
     }
+
 
     public ApiResponse getByRole(Integer role_id) {
         List<User> allByRole_id = userRepository.findAllByRole_Id(role_id);

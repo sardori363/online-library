@@ -1,6 +1,7 @@
 package com.sardor.unsplash.controller;
 
 import com.sardor.unsplash.payload.ProfileDto;
+import com.sardor.unsplash.payload.RegisterDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -53,8 +54,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public HttpEntity<?> registerUser(@Valid @RequestBody ProfileDto profileDto) {
-        ApiResponse apiResponse = authService.registerUser(profileDto);
+    public HttpEntity<?> registerUser(@RequestBody RegisterDto registerDto) {
+        ApiResponse apiResponse = authService.registerUser(registerDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }
