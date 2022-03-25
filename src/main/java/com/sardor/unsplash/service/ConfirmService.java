@@ -1,13 +1,17 @@
 package com.sardor.unsplash.service;
 
+import com.sardor.unsplash.entity.Author;
 import com.sardor.unsplash.entity.Book;
 import com.sardor.unsplash.entity.RequestBook;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.ConfirmDto;
+import com.sardor.unsplash.repository.AuthorRepository;
 import com.sardor.unsplash.repository.BookRepository;
 import com.sardor.unsplash.repository.RequestBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ConfirmService {
@@ -17,6 +21,9 @@ public class ConfirmService {
 
     @Autowired
     BookRepository bookRepository;
+
+    @Autowired
+    AuthorRepository authorRepository;
 
     public ApiResponse confirm(Integer requestId, ConfirmDto confirmDto) {
 
@@ -29,9 +36,12 @@ public class ConfirmService {
             book.setDescription(optionalRequest.getDescription());
             book.setCategory(optionalRequest.getCategory());
             book.setPhoto(optionalRequest.getPhoto());
-            book.setAuthor(optionalRequest.getAuthor());
             book.setFirstPublished(optionalRequest.getFirstPublished());
             book.setAddedBy(optionalRequest.getCreatedBy());
+
+            Optional<Author> optionalAuthor = authorRepository.findById(confirmDto.getAuthorId());
+            if (optionalAuthor.isEmpty()) return new ApiResponse("author not found");
+            book.setAuthor(optionalAuthor.get());
 
             bookRepository.save(book);
             requestBookRepository.deleteById(requestId);

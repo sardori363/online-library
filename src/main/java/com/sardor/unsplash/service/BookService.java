@@ -1,11 +1,13 @@
 package com.sardor.unsplash.service;
 
 import com.sardor.unsplash.entity.Attachment;
+import com.sardor.unsplash.entity.Author;
 import com.sardor.unsplash.entity.Book;
 import com.sardor.unsplash.entity.Category;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.BookDto;
 import com.sardor.unsplash.repository.AttachmentRepository;
+import com.sardor.unsplash.repository.AuthorRepository;
 import com.sardor.unsplash.repository.BookRepository;
 import com.sardor.unsplash.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,9 @@ public class BookService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    AuthorRepository authorRepository;
+
 
     public ApiResponse add(BookDto bookDto) {
         Book book = new Book();
@@ -45,8 +50,11 @@ public class BookService {
     public ApiResponse create(Book book, BookDto bookDto) {
         book.setName(bookDto.getName());
         book.setDescription(bookDto.getDescription());
-        book.setAuthor(bookDto.getAuthor());
         book.setFirstPublished(bookDto.getFirstPublished());
+
+        Optional<Author> optionalAuthor = authorRepository.findById(bookDto.getAuthorId());
+        if (optionalAuthor.isEmpty()) return new ApiResponse("author not found");
+        book.setAuthor(optionalAuthor.get());
 
         Optional<Attachment> optionalPdf = attachmentRepository.findById(bookDto.getPdfFileId());
         if (optionalPdf.isEmpty()) return new ApiResponse("pdf not found", false);

@@ -25,7 +25,7 @@ public class Book extends AbsEntity {
     @JoinColumn(nullable = false)
     private Attachment pdfFile;
 
-    @Column(length = 1000)
+    @Column(length = 5000)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,8 +35,9 @@ public class Book extends AbsEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private Attachment photo;
 
-    @Column(nullable = false)
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Author author;
 
     @Column(nullable = false)
     private Date firstPublished;

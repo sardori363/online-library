@@ -16,7 +16,7 @@ public class BookDto {
     private String description;
     private Integer categoryId;
     private Integer photoId;
-    private String author;
+    private Integer authorId;
     private Date firstPublished;
     private Integer addedBy;
 }

@@ -39,7 +39,7 @@ public class User extends AbsEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(length = 2000)
+    @Column(length = 3000)
     private String bio;
 
     @OneToMany
