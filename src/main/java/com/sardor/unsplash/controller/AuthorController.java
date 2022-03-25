@@ -4,9 +4,12 @@ import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.AuthorDto;
 import com.sardor.unsplash.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/author")
@@ -40,7 +43,11 @@ public class AuthorController {
 
     @DeleteMapping("/{id}")
     public HttpEntity<?> delete(@PathVariable Integer id) {
-        ApiResponse apiResponse = authorService.delete(id);
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+        try {
+            ApiResponse apiResponse = authorService.delete(id);
+            return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.badRequest().body("Error. Perhaps this author is associated with some book");
+        }
     }
 }
