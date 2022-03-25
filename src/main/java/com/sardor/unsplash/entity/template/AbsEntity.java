@@ -18,11 +18,11 @@ public abstract class AbsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Timestamp createdAt;
 
-    @Column(updatable = false)
     @UpdateTimestamp
     private Timestamp updateAt;
 }
