@@ -45,11 +45,14 @@ public class User extends AbsEntity implements UserDetails {
     @OneToMany
     private List<Contacts> contacts;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     private Role role;
 
     @OneToOne
     private Attachment photo;
+
+    @ManyToOne
+    private SavedBooks savedBooks;
 
     //yoqilgan
     private boolean enabled = false;
