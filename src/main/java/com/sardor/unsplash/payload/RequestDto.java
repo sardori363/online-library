@@ -13,4 +13,5 @@ public class RequestDto {
     private Integer photoId;
     private String author;
     private Date firstPublished;
+    private String language;
 }

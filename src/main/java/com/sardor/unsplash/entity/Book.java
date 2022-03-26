@@ -44,4 +44,7 @@ public class Book extends AbsEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User addedBy;
+
+    @Column(nullable = false,length = 5)
+    private String language;
 }

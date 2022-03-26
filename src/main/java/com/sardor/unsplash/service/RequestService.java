@@ -47,6 +47,9 @@ public class RequestService {
         requestBook.setAuthor(requestDto.getAuthor());
         requestBook.setFirstPublished(requestDto.getFirstPublished());
 
+        if (requestDto.getLanguage().length()>5) return new ApiResponse("characters must be less than 5",false);
+        requestBook.setLanguage(requestDto.getLanguage());
+
         Optional<Attachment> optionalPdf = attachmentRepository.findById(requestDto.getPdfFileId());
         if (optionalPdf.isEmpty()) return new ApiResponse("Pdf not found", false);
         requestBook.setPdfFile(optionalPdf.get());

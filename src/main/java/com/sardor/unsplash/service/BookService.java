@@ -52,6 +52,9 @@ public class BookService {
         book.setDescription(bookDto.getDescription());
         book.setFirstPublished(bookDto.getFirstPublished());
 
+        if (bookDto.getLanguage().length()>5) return new ApiResponse("characters must be less than 5",false);
+        book.setLanguage(bookDto.getLanguage());
+
         Optional<Author> optionalAuthor = authorRepository.findById(bookDto.getAuthorId());
         if (optionalAuthor.isEmpty()) return new ApiResponse("author not found");
         book.setAuthor(optionalAuthor.get());

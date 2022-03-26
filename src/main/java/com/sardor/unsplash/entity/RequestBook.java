@@ -39,4 +39,7 @@ public class RequestBook extends AbsMainEntity {
 
     @Column(nullable = false)
     private Date firstPublished;
+
+    @Column(nullable = false,length = 5)
+    private String language;
 }

@@ -19,4 +19,5 @@ public class BookDto {
     private Integer authorId;
     private Date firstPublished;
     private Integer addedBy;
+    private String language;
 }

@@ -47,6 +47,7 @@ public class ConfirmService {
             requestBookRepository.deleteById(requestId);
             return new ApiResponse("saved", true);
         }
+        requestBookRepository.deleteById(requestId);
         return new ApiResponse("rejected", false);
     }
 }
