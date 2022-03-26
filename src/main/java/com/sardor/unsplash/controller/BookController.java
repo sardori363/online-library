@@ -18,6 +18,9 @@ public class BookController {
     BookService bookService;
 
 
+    //                 CRUD METHODS
+
+
     @PostMapping
     public HttpEntity<?> add(@RequestBody BookDto bookDto) {
         ApiResponse apiResponse = bookService.add(bookDto);
@@ -45,6 +48,34 @@ public class BookController {
     @DeleteMapping("/{id}")
     public HttpEntity<?> delete(@PathVariable Integer id) {
         ApiResponse apiResponse = bookService.delete(id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+
+    //                                  OTHER METHODS
+
+
+    @GetMapping("get-by-lang")
+    public HttpEntity<?> getByLang(@RequestParam String lang) {
+        ApiResponse apiResponse = bookService.getByLang(lang);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("get-by-name")
+    public HttpEntity<?> getByName(@RequestParam String name) {
+        ApiResponse apiResponse = bookService.getByName(name);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("get-by-categoryId/{category_id}")
+    public HttpEntity<?> getByCategoryId(@PathVariable Integer category_id) {
+        ApiResponse apiResponse = bookService.getByCategoryId(category_id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
+
+    @GetMapping("get-by-authorId/{author_id}")
+    public HttpEntity<?> getByAuthorId(@PathVariable Integer author_id) {
+        ApiResponse apiResponse = bookService.getByAuthorId(author_id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
 }

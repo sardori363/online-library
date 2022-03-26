@@ -1,12 +1,10 @@
 package com.sardor.unsplash.entity;
 
 import com.sardor.unsplash.entity.template.AbsEntity;
-import com.sardor.unsplash.entity.template.AbsMainEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -42,9 +40,6 @@ public class Book extends AbsEntity {
     @Column(nullable = false)
     private Date firstPublished;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User addedBy;
-
-    @Column(nullable = false,length = 5)
+    @Column(nullable = false, length = 5)
     private String language;
 }

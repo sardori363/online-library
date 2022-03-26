@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -52,7 +53,7 @@ public class BookService {
         book.setDescription(bookDto.getDescription());
         book.setFirstPublished(bookDto.getFirstPublished());
 
-        if (bookDto.getLanguage().length()>5) return new ApiResponse("characters must be less than 5",false);
+        if (bookDto.getLanguage().length() > 5) return new ApiResponse("characters must be less than 5", false);
         book.setLanguage(bookDto.getLanguage());
 
         Optional<Author> optionalAuthor = authorRepository.findById(bookDto.getAuthorId());
@@ -88,5 +89,29 @@ public class BookService {
         if (!bookRepository.existsById(id)) return new ApiResponse("book not found", false);
         bookRepository.deleteById(id);
         return new ApiResponse("deleted", true);
+    }
+
+    public ApiResponse getByLang(String lang) {
+        List<Book> allByLanguage = bookRepository.findAllByLanguage(lang);
+        if (allByLanguage.isEmpty()) return new ApiResponse("book not found", false);
+        return new ApiResponse("found", true, bookRepository.findAllByLanguage(lang));
+    }
+
+    public ApiResponse getByName(String name) {
+        List<Book> allByName = bookRepository.findAllByName(name);
+        if (allByName.isEmpty()) return new ApiResponse("book not found", false);
+        return new ApiResponse("found", true, bookRepository.findAllByName(name));
+    }
+
+    public ApiResponse getByCategoryId(Integer category_id) {
+        List<Book> allByCategoryId = bookRepository.findAllByCategoryId(category_id);
+        if (allByCategoryId.isEmpty()) return new ApiResponse("book not found", false);
+        return new ApiResponse("found",true,bookRepository.findAllByCategoryId(category_id));
+    }
+
+    public ApiResponse getByAuthorId(Integer author_id) {
+        List<Book> allByAuthorId = bookRepository.findAllByAuthorId(author_id);
+        if (allByAuthorId.isEmpty()) return new ApiResponse("book not found", false);
+        return new ApiResponse("found",true,bookRepository.findAllByAuthorId(author_id));
     }
 }

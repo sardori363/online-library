@@ -18,6 +18,5 @@ public class BookDto {
     private Integer photoId;
     private Integer authorId;
     private Date firstPublished;
-    private Integer addedBy;
     private String language;
 }

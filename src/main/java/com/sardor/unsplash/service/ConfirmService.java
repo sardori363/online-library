@@ -37,7 +37,7 @@ public class ConfirmService {
             book.setCategory(optionalRequest.getCategory());
             book.setPhoto(optionalRequest.getPhoto());
             book.setFirstPublished(optionalRequest.getFirstPublished());
-            book.setAddedBy(optionalRequest.getCreatedBy());
+            book.setLanguage(optionalRequest.getLanguage());
 
             Optional<Author> optionalAuthor = authorRepository.findById(confirmDto.getAuthorId());
             if (optionalAuthor.isEmpty()) return new ApiResponse("author not found");
