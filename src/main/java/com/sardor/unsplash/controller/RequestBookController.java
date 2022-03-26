@@ -17,13 +17,13 @@ public class RequestBookController {
     @PostMapping
     public HttpEntity<?> add(@RequestBody RequestDto requestDto) {
         ApiResponse apiResponse = requestService.add(requestDto);
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 201 : 409).body(apiResponse);
     }
 
     @PutMapping("/{id}")
     public HttpEntity<?> edit(@PathVariable Integer id, @RequestBody RequestDto requestDto) {
         ApiResponse apiResponse = requestService.edit(id, requestDto);
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 202 : 409).body(apiResponse);
     }
 
     @GetMapping("/{id}")
@@ -41,12 +41,12 @@ public class RequestBookController {
     @DeleteMapping("/{id}")
     public HttpEntity<?> deleteOne(@PathVariable Integer id) {
         ApiResponse apiResponse = requestService.deleteOne(id);
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 204 : 409).body(apiResponse);
     }
 
     @DeleteMapping
     public HttpEntity<?> deleteAll() {
         ApiResponse apiResponse = requestService.deleteAll();
-        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 204 : 409).body(apiResponse);
     }
 }

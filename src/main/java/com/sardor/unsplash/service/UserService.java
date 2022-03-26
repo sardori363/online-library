@@ -1,21 +1,20 @@
 package com.sardor.unsplash.service;
 
-import com.sardor.unsplash.entity.Contacts;
+import com.sardor.unsplash.entity.*;
 import com.sardor.unsplash.repository.ContactsRepository;
+import com.sardor.unsplash.repository.SavedBooksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.sardor.unsplash.entity.Attachment;
-import com.sardor.unsplash.entity.Role;
-import com.sardor.unsplash.entity.User;
 import com.sardor.unsplash.payload.ApiResponse;
 import com.sardor.unsplash.payload.ProfileDto;
 import com.sardor.unsplash.payload.UserDto;
 import com.sardor.unsplash.repository.AttachmentRepository;
 import com.sardor.unsplash.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,18 +23,16 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     PasswordEncoder passwordEncoder;
-
     @Autowired
     RoleService roleService;
-
     @Autowired
     AttachmentRepository attachmentRepository;
-
     @Autowired
     ContactsRepository contactsRepository;
+    @Autowired
+    SavedBooksRepository savedBooksRepository;
 
     public ApiResponse add(UserDto userDto) {
         boolean b = userRepository.existsByUsername(userDto.getUsername());
@@ -64,6 +61,10 @@ public class UserService {
         Optional<Attachment> optionalPhoto = attachmentRepository.findById(userDto.getPhotoId());
         if (optionalPhoto.isEmpty()) return new ApiResponse("PHOTO NOT FOUND", false);
         user.setPhoto(optionalPhoto.get());
+
+        SavedBooks savedBooks = new SavedBooks(new ArrayList<>());
+        SavedBooks save = savedBooksRepository.save(savedBooks);
+        user.setSavedBooks(save);
 
         userRepository.save(user);
         return new ApiResponse("ADDED", true);
