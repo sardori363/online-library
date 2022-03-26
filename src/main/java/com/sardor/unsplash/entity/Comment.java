@@ -22,7 +22,7 @@ public class Comment extends AbsMainEntity {
     @JoinColumn(nullable = false)
     private Book book;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String text;
 
 }

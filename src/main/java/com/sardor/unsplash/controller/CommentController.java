@@ -43,4 +43,10 @@ public class CommentController {
         ApiResponse apiResponse = commentService.delete(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
     }
+
+    @GetMapping("get-by-bookId/{book_id}")
+    public HttpEntity<?> getByBook(@PathVariable Integer book_id) {
+        ApiResponse apiResponse = commentService.getByBook(book_id);
+        return ResponseEntity.status(apiResponse.isSuccess() ? 200 : 409).body(apiResponse);
+    }
 }
